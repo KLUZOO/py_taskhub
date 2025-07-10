@@ -1,5 +1,11 @@
 from django.urls import path
 
-urlpatterns = []
+from .views import (
+    TaskList
+)
+
+urlpatterns = [
+    path("", TaskList.as_view(), name="task_list"),
+]
 
 app_name = "tasks"
