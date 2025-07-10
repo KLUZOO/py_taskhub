@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views import generic
-
+from django.urls import reverse_lazy
+from tasks.forms import WorkerCreationForm
 from tasks.models import Task, Worker, TaskType, Position
 
 
@@ -21,6 +22,7 @@ class TaskTypeListView(generic.ListView):
     fields = "__all__"
     template_name = "tasks/task_type_list.html"
 
+
 class PositionListView(generic.ListView):
     model = Position
     fields = "__all__"
@@ -30,4 +32,5 @@ class PositionListView(generic.ListView):
 class WorkerCreateView(generic.CreateView):
     model = Worker
     template_name = "registration/signup.html"
-    fields = "__all__"
+    success_url = reverse_lazy("tasks:task_list")
+    form_class = WorkerCreationForm
