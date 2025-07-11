@@ -4,6 +4,7 @@ from .views import (
     TaskListView,
     TaskDetailView,
     TaskCreateView,
+    DriverDeleteView,
     WorkerListView,
     TaskTypeListView,
     PositionListView,
@@ -15,6 +16,11 @@ urlpatterns = [
     path("", TaskListView.as_view(), name="task-list"),
     path("task/<int:pk>/", TaskDetailView.as_view(), name="task-detail"),
     path("task/create/", TaskCreateView.as_view(), name="task-create"),
+    path(
+        "task/<int:pk>/delete/",
+        DriverDeleteView.as_view(),
+        name="task-delete",
+    ),
     path(
         "cars/<int:pk>/toggle-complete/",
         toggle_complete_to_task,

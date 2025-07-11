@@ -35,6 +35,11 @@ class TaskCreateView(LoginRequiredMixin, generic.CreateView):
     template_name = "tasks/task_form.html"
 
 
+class DriverDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = Task
+    success_url = reverse_lazy("tasks:task-list")
+
+
 class WorkerListView(generic.ListView):
     model = Worker
     fields = "__all__"
