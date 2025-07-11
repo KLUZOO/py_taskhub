@@ -60,7 +60,7 @@
         </form>
         {% if user.is_authenticated %}
           <div class="d-flex">
-            <a class="btn btn-outline-light me-2" href="{% url 'tasks:singup-create' %}">{{ user.username }}</a>
+            <a class="btn btn-outline-light me-2" href="{% url 'tasks:worker-detail' pk=user.id %}">{{ user.username }}</a>
             <a class="btn btn-primary" href="{% url 'logout'%}?next={{request.path}}">Logout</a>
           </div>
         {% else %}

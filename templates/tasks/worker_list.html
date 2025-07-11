@@ -5,8 +5,11 @@
     <div class="row featurette mb-5 align-items-center">
       <div class="col-md-7">
         <h2 class="featurette-heading">
-          <a href="#" class="text-decoration-none text-dark">
-            {{ worker.get_full_name|default:worker.username }}{% if user.pk == worker.pk %} <span class="text-primary fw-bold">(Me)</span>{% endif %}
+          <a href="{% url 'tasks:worker-detail' pk=worker.id %}" class="text-decoration-none text-dark">
+            {{ worker.get_full_name|default:worker.username }}
+            {% if user.pk == worker.pk %}
+              <span class="text-primary fw-bold">(Me)</span>
+            {% endif %}
           </a>
         </h2>
         <p class="lead">
@@ -20,7 +23,7 @@
         <p class="lead">
           <strong>Assigned tasks:</strong> {{ worker.tasks.count }}
         </p>
-        <a href="#" class="btn btn-outline-primary">More detail</a>
+        <a href="{% url 'tasks:worker-detail' pk=worker.id %}" class="btn btn-outline-primary">More detail</a>
       </div>
     </div>
     <hr class="featurette-divider">

@@ -34,6 +34,7 @@ class TaskCreateView(LoginRequiredMixin, generic.CreateView):
     success_url = reverse_lazy("tasks:task-list")
     template_name = "tasks/task_form.html"
 
+
 class TaskUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Task
     form_class = TaskCreateForm
@@ -43,6 +44,11 @@ class TaskUpdateView(LoginRequiredMixin, generic.UpdateView):
 class TaskDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Task
     success_url = reverse_lazy("tasks:task-list")
+
+
+class WorkerDetailView(generic.DetailView):
+    model = Worker
+    queryset = Worker.objects.prefetch_related("tasks").all()
 
 
 class WorkerListView(generic.ListView):
