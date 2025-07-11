@@ -11,6 +11,7 @@ from .views import (
     WorkerListView,
     WorkerDetailView,
     WorkerCreateView,
+    WorkerUpdateView,
     WorkerDeleteView,
     toggle_complete_to_task,
 )
@@ -36,6 +37,7 @@ urlpatterns = [
     ),
     path("worker/", WorkerListView.as_view(), name="worker-list"),
     path("worker/<int:pk>/", WorkerDetailView.as_view(), name="worker-detail"),
+    path("accounts/<int:pk>/update/", WorkerUpdateView.as_view(), name="worker-update"),
     path(
         "worker/<int:pk>/delete/",
         WorkerDeleteView.as_view(),

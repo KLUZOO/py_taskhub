@@ -44,3 +44,12 @@ class WorkerCreationForm(UserCreationForm):
             "email",
             "position",
         )
+
+class WorkerUpdateForm(forms.ModelForm):
+    assignees = forms.ModelMultipleChoiceField(
+        queryset=get_user_model().objects.all(),
+        widget=forms.CheckboxSelectMultiple,
+    )
+    class Meta(UserCreationForm.Meta):
+        model = Worker
+        fields = UserCreationForm.Meta.fields + ("first_name", "last_name", "email", "position")

@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
-from tasks.forms import WorkerCreationForm, TaskForm, TaskCreateForm
+from tasks.forms import WorkerCreationForm, TaskForm, TaskCreateForm, WorkerUpdateForm
 from tasks.models import Task, Worker, TaskType, Position
 
 
@@ -62,6 +62,12 @@ class WorkerCreateView(generic.CreateView):
     template_name = "registration/signup.html"
     success_url = reverse_lazy("login")
     form_class = WorkerCreationForm
+
+
+class WorkerUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Worker
+    form_class = WorkerUpdateForm
+    success_url = reverse_lazy("tasks:worker-list")
 
 
 class WorkerDeleteView(LoginRequiredMixin, generic.DeleteView):
