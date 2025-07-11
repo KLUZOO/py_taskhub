@@ -1,3 +1,5 @@
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -56,3 +58,16 @@ class PositionListView(generic.ListView):
     model = Position
     fields = "__all__"
     template_name = "tasks/position_list.html"
+
+
+@login_required
+def toggle_complete_to_task(request, pk):
+    task = Task.objects.get(pk=pk)
+    if request.user in task.assignees.all():
+        if task.is_complete:
+            task.is_complete = False
+            task.save()
+        else:
+            task.is_complete = True
+            task.save()
+    return HttpResponseRedirect(reverse_lazy("tasks:task-detail", args=[pk]))

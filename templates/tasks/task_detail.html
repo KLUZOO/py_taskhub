@@ -6,9 +6,9 @@
         <a class="btn btn-primary me-2" href="#">Update task</a>
         <a class="btn btn-danger me-2" href="#">Delete task</a>
         {% if task.is_complete %}
-          <a class="btn btn-success" href="#">Completed: Yes</a>
+          <a class="btn btn-success" href="{% url 'tasks:toggle-task-complete' pk=task.id %}">Completed: Yes</a>
         {% else %}
-          <a class="btn btn-warning" href="#">Completed: No</a>
+          <a class="btn btn-warning" href="{% url 'tasks:toggle-task-complete' pk=task.id %}">Completed: No</a>
         {% endif %}
       </div>
     </li>
