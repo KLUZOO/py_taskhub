@@ -1,10 +1,12 @@
 {% extends "base.html" %}
 {% block create %}
-  <li>
-    <div class="d-flex">
-      <a class="btn btn-primary" href="#">Create task</a>
-    </div>
-  </li>
+  {% if user.is_authenticated %}
+    <li>
+      <div class="d-flex">
+        <a class="btn btn-primary" href="#">Create task</a>
+      </div>
+    </li>
+  {% endif %}
 {% endblock %}
 {% block container %}
 
