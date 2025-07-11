@@ -3,7 +3,7 @@
   {% if user.is_authenticated %}
     <li>
       <div class="d-flex">
-        <a class="btn btn-primary me-2" href="#">Update task</a>
+        <a class="btn btn-primary me-2" href="{% url 'tasks:task-update' pk=task.id %}">Update task</a>
         <a class="btn btn-danger me-2" href="{% url 'tasks:task-delete' pk=task.id %}">Delete task</a>
         {% if task.is_complete %}
           <a class="btn btn-success" href="{% url 'tasks:toggle-task-complete' pk=task.id %}">Completed: Yes</a>
