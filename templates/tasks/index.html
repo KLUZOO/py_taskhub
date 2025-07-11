@@ -93,7 +93,7 @@
       <div class="col-md-7">
         <h2 class="featurette-heading">
           <a href="{% url 'tasks:task-detail' task.id %}" class="text-decoration-none link-dark task-link">
-            {{ task.name }}
+            {{ task.name }} {% if user in task.assignees.all %}(assigned){% endif %}
           </a>
         </h2>
         {% if task.description %}
