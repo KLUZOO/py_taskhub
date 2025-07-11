@@ -3,12 +3,12 @@
   {% if user.is_authenticated %}
     <li>
       <div class="d-flex">
-        <a class="btn btn-primary me-2" href="{% url 'tasks:task-update' pk=task.id %}">Update task</a>
-        <a class="btn btn-danger me-2" href="{% url 'tasks:task-delete' pk=task.id %}">Delete task</a>
+        <a class="btn btn-primary me-2" href="{% url 'tasks:task-update' pk=task.id %}">Update&nbsp;task</a>
+        <a class="btn btn-danger me-2" href="{% url 'tasks:task-delete' pk=task.id %}">Delete&nbsp;task</a>
         {% if task.is_complete %}
-          <a class="btn btn-success" href="{% url 'tasks:toggle-task-complete' pk=task.id %}">Completed: Yes</a>
+          <a class="btn btn-success" href="{% url 'tasks:toggle-task-complete' pk=task.id %}">Completed:&nbsp;Yes</a>
         {% else %}
-          <a class="btn btn-warning" href="{% url 'tasks:toggle-task-complete' pk=task.id %}">Completed: No</a>
+          <a class="btn btn-warning" href="{% url 'tasks:toggle-task-complete' pk=task.id %}">Completed:&nbsp;No</a>
         {% endif %}
       </div>
     </li>
