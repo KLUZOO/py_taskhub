@@ -61,7 +61,7 @@
         {% if user.is_authenticated %}
           <div class="d-flex">
             <a class="btn btn-outline-light me-2" href="{% url 'tasks:singup_create' %}">{{ user.username }}</a>
-            <a class="btn btn-primary" href="#">Logout</a>
+            <a class="btn btn-primary" href="{% url 'logout'%}?next={{request.path}}">Logout</a>
           </div>
         {% else %}
           <div class="d-flex">
@@ -69,7 +69,6 @@
             <a class="btn btn-primary" href="#">Login</a>
           </div>
         {% endif %}
-
       </div>
     </div>
   </nav>
