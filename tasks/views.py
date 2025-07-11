@@ -8,8 +8,18 @@ from tasks.models import Task, Worker, TaskType, Position
 
 class TaskListView(generic.ListView):
     model = Task
-    fields = "__all__"
+    queryset = Task.objects.select_related("task_type").prefetch_related("assignees").all().ordered_by_priority()
     template_name = "tasks/index.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(TaskListView, self).get_context_data(**kwargs)
+        context["num_tasks"] = Task.objects.count()
+        context["num_workers"] = Worker.objects.count()
+        context["num_positions"] = Position.objects.count()
+        num_visits = self.request.session.get("num_visits", 0)
+        self.request.session["num_visits"] = num_visits + 1
+        context["num_visits"] = num_visits
+        return context
 
 
 class TaskCreateView(LoginRequiredMixin, generic.CreateView):

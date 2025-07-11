@@ -1,5 +1,19 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.db.models import Case, When, IntegerField
+
+
+class TaskQuerySet(models.QuerySet):
+    def ordered_by_priority(self):
+        return self.annotate(
+            priority_order=Case(
+                When(priority="Urgent", then=1),
+                When(priority="High", then=2),
+                When(priority="Medium", then=3),
+                When(priority="Low", then=4),
+                output_field=IntegerField()
+            )
+        ).order_by("priority_order", "deadline")
 
 
 class Position(models.Model):
@@ -78,6 +92,9 @@ class Task(models.Model):
         related_name="tasks",
         blank=True
     )
+
+    objects = TaskQuerySet.as_manager()
+
 
     def __str__(self):
         return self.name

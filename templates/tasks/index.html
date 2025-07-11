@@ -21,6 +21,19 @@
     <div class="carousel-inner">
 
       <div class="carousel-item active">
+        <div class="container">
+          <div class="carousel-caption text-start">
+            <h1>Total number of tasks: {{ num_tasks }}</h1>
+            <p>Keep track of every task and stay productive with TaskHub.</p>
+          </div>
+        </div>
+        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+             preserveAspectRatio="xMidYMid slice" focusable="false">
+          <rect width="100%" height="100%" fill="#777"/>
+        </svg>
+      </div>
+
+      <div class="carousel-item">
         <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
              preserveAspectRatio="xMidYMid slice" focusable="false">
           <rect width="100%" height="100%" fill="#777"/>
@@ -28,9 +41,8 @@
 
         <div class="container">
           <div class="carousel-caption text-start">
-            <h1>Total number of tasks: {{ 1 }}</h1>
-            <p>Some representative placeholder content for the first slide of the carousel.</p>
-            <p><a class="btn btn-lg btn-primary" href="">Sign up today</a></p>
+            <h1>Total number of workers: {{ num_workers }}</h1>
+            <p>Your team is the driving force behind every successful project.</p>
           </div>
         </div>
       </div>
@@ -43,9 +55,8 @@
 
         <div class="container">
           <div class="carousel-caption text-start">
-            <h1>Total number of tasks: {{ 1 }}</h1>
-            <p>Some representative placeholder content for the first slide of the carousel.</p>
-            <p><a class="btn btn-lg btn-primary" href="#">Sign up today</a></p>
+            <h1>Total number of positions: {{ num_positions }}</h1>
+            <p>All roles in one place — from programmers to project managers.</p>
           </div>
         </div>
       </div>
@@ -58,24 +69,8 @@
 
         <div class="container">
           <div class="carousel-caption text-start">
-            <h1>Total number of tasks: {{ 1 }}</h1>
-            <p>Some representative placeholder content for the first slide of the carousel.</p>
-            <p><a class="btn btn-lg btn-primary" href="#">Sign up today</a></p>
-          </div>
-        </div>
-      </div>
-
-      <div class="carousel-item">
-        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
-             preserveAspectRatio="xMidYMid slice" focusable="false">
-          <rect width="100%" height="100%" fill="#777"/>
-        </svg>
-
-        <div class="container">
-          <div class="carousel-caption text-start">
-            <h1>Total number of tasks: {{ 1 }}</h1>
-            <p>Some representative placeholder content for the first slide of the carousel.</p>
-            <p><a class="btn btn-lg btn-primary" href="#">Sign up today</a></p>
+            <h1>Total number of visits: {{ num_visits }}</h1>
+            <p>Track how often users interact with the system.</p>
           </div>
         </div>
       </div>
@@ -93,25 +88,46 @@
 
   {#---------------------------------------------------------------------------------------------------------------#}
   <hr class="featurette-divider">
-  {% for item in items %}
-    <div class="row featurette">
+  {% for task in task_list %}
+    <div class="row featurette mb-5 align-items-center">
       <div class="col-md-7">
-        <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It’ll blow your mind.</span>
+        <h2 class="featurette-heading">
+          <a href="#" class="text-decoration-none link-dark task-link">
+            {{ task.name }}
+          </a>
         </h2>
-        <p class="lead">Some great placeholder content for the first featurette here. Imagine some exciting prose
-          here.</p>
+        {% if task.description %}
+          <p class="lead">{{ task.description }}</p>
+        {% else %}
+          <p class="text-muted">No description provided.</p>
+        {% endif %}
       </div>
-      <div class="col-md-5">
-        <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500"
-             height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500"
-             preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title>
-          <rect width="100%" height="100%" fill="#eee"/>
-          <text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text>
-        </svg>
 
+      <div class="col-md-5">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <strong>Deadline:</strong> {{ task.deadline|date:"Y-m-d H:i" }}
+          </li>
+          <li class="list-group-item">
+            <strong>Completed:</strong>
+            {% if task.is_complete %}
+              <span class="text-success">Yes</span>
+            {% else %}
+              <span class="text-danger">No</span>
+            {% endif %}
+          </li>
+          <li class="list-group-item">
+            <strong>Priority:</strong> {{ task.get_priority_display }}
+          </li>
+          <li class="list-group-item">
+            <strong>Task type:</strong> {{ task.task_type }}
+          </li>
+          <li class="list-group-item">
+            <strong>Assignees:</strong> {{ task.assignees.count }}
+          </li>
+        </ul>
       </div>
     </div>
-
     <hr class="featurette-divider">
   {% empty %}
     <p class="lead">There are no tasks.</p>
