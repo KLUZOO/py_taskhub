@@ -8,6 +8,7 @@ from .views import (
     TaskDeleteView,
     TaskTypeListView,
     TaskTypeCreateView,
+    TaskTypeUpdateView,
     PositionListView,
     WorkerListView,
     WorkerDetailView,
@@ -46,6 +47,11 @@ urlpatterns = [
     ),
     path("task-type/", TaskTypeListView.as_view(), name="task-type-list"),
     path("task-type/create/", TaskTypeCreateView.as_view(), name="task-type-create"),
+    path(
+        "task-type/<int:pk>/update/",
+        TaskTypeUpdateView.as_view(),
+        name="task-type-update",
+    ),
     path("position/", PositionListView.as_view(), name="position-list"),
     path("accounts/singup/", WorkerCreateView.as_view(), name="singup-create"),
 ]
