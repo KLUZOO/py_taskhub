@@ -3,7 +3,7 @@
   {% if user.is_authenticated %}
     <li>
       <div class="d-flex">
-        <a class="btn btn-primary" href="#">Create task</a>
+        <a class="btn btn-primary" href="{% url "tasks:task-create" %}">Create task</a>
       </div>
     </li>
   {% endif %}
