@@ -13,7 +13,7 @@ class TaskQuerySet(models.QuerySet):
                 When(priority="Low", then=4),
                 output_field=IntegerField()
             )
-        ).order_by("priority_order", "deadline")
+        ).order_by("is_complete" ,"priority_order", "deadline")
 
 
 class Position(models.Model):
