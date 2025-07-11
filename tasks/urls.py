@@ -11,6 +11,7 @@ from .views import (
     WorkerListView,
     WorkerDetailView,
     WorkerCreateView,
+    WorkerDeleteView,
     toggle_complete_to_task,
 )
 
@@ -29,12 +30,17 @@ urlpatterns = [
         name="task-delete",
     ),
     path(
-        "cars/<int:pk>/toggle-complete/",
+        "toggle/<int:pk>/toggle-complete/",
         toggle_complete_to_task,
         name="toggle-task-complete",
     ),
     path("worker/", WorkerListView.as_view(), name="worker-list"),
     path("worker/<int:pk>/", WorkerDetailView.as_view(), name="worker-detail"),
+    path(
+        "worker/<int:pk>/delete/",
+        WorkerDeleteView.as_view(),
+        name="worker-delete",
+    ),
     path("task-type/", TaskTypeListView.as_view(), name="task-type-list"),
     path("position/", PositionListView.as_view(), name="position-list"),
     path("accounts/singup/", WorkerCreateView.as_view(), name="singup-create"),

@@ -46,7 +46,7 @@ class TaskDeleteView(LoginRequiredMixin, generic.DeleteView):
     success_url = reverse_lazy("tasks:task-list")
 
 
-class WorkerDetailView(generic.DetailView):
+class WorkerDetailView(LoginRequiredMixin, generic.DetailView):
     model = Worker
     queryset = Worker.objects.prefetch_related("tasks").all()
 
@@ -62,6 +62,11 @@ class WorkerCreateView(generic.CreateView):
     template_name = "registration/signup.html"
     success_url = reverse_lazy("login")
     form_class = WorkerCreationForm
+
+
+class WorkerDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = Worker
+    success_url = reverse_lazy("login")
 
 
 class TaskTypeListView(generic.ListView):
