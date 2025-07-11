@@ -69,3 +69,15 @@ class WorkerUpdateForm(forms.ModelForm):
             worker.save()
         worker.tasks.set(self.cleaned_data["tasks"])
         return worker
+
+
+class SearchForm(forms.Form):
+    title = forms.CharField(
+        required=False,
+        label="",
+        widget=forms.TextInput(attrs={
+            "class": "form-control me-2",
+            "placeholder": "Search",
+            "aria-label": "Search"
+        })
+    )

@@ -1,5 +1,10 @@
 {% extends "base.html" %}
-
+{% block search %}
+  <form method="get" action="" class="d-flex me-3" role="search">
+        {{ search }}
+    <button class="btn btn-outline-success" type="submit">Search</button>
+  </form>
+{% endblock %}
 {% block container %}
   {% for worker in worker_list %}
     <div class="row featurette mb-5 align-items-center">
