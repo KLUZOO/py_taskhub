@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block create %}
+  {% if user.is_authenticated %}
+    <li>
+      <div class="d-flex">
+        <a class="btn btn-primary me-2" href="#">Update task</a>
+        <a class="btn btn-danger me-2" href="#">Delete task</a>
+        {% if task.is_complete %}
+          <a class="btn btn-success" href="#">Completed: Yes</a>
+        {% else %}
+          <a class="btn btn-warning" href="#">Completed: No</a>
+        {% endif %}
+      </div>
+    </li>
+  {% endif %}
+{% endblock %}
+
+{% load crispy_forms_filters %}
+
+{% block container %}
+  <h1>{{ task.name }}</h1>
+  <p>{{ task.description }}</p>
+
+{% endblock %}

@@ -22,6 +22,10 @@ class TaskListView(generic.ListView):
         return context
 
 
+class TaskDetailView(generic.DetailView):
+    model = Task
+
+
 class TaskCreateView(LoginRequiredMixin, generic.CreateView):
     model = Task
     form_class = TaskForm
