@@ -101,6 +101,20 @@ class PositionListView(generic.ListView):
     template_name = "tasks/position_list.html"
 
 
+class PositionCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Position
+    fields = '__all__'
+    success_url = reverse_lazy("tasks:position-list")
+    template_name = "tasks/position_form.html"
+
+
+class PositionUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Position
+    fields = '__all__'
+    success_url = reverse_lazy("tasks:position-list")
+    template_name = "tasks/position_form.html"
+
+
 @login_required
 def toggle_complete_to_task(request, pk):
     task = Task.objects.get(pk=pk)
