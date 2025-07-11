@@ -32,5 +32,5 @@ class PositionListView(generic.ListView):
 class WorkerCreateView(generic.CreateView):
     model = Worker
     template_name = "registration/signup.html"
-    success_url = reverse_lazy("tasks:task_list")
+    success_url = reverse_lazy("login")
     form_class = WorkerCreationForm
