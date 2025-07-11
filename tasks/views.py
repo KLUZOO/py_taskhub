@@ -12,6 +12,7 @@ from tasks.models import Task, Worker, TaskType, Position
 class TaskListView(generic.ListView):
     model = Task
     template_name = "tasks/index.html"
+    paginate_by = 2
 
     def get_context_data(self, **kwargs):
         context = super(TaskListView, self).get_context_data(**kwargs)
@@ -66,6 +67,7 @@ class WorkerListView(generic.ListView):
     model = Worker
     fields = "__all__"
     template_name = "tasks/worker_list.html"
+    paginate_by = 2
 
     def get_context_data(self, **kwargs):
         context = super(WorkerListView, self).get_context_data(**kwargs)
@@ -106,6 +108,7 @@ class TaskTypeListView(generic.ListView):
     model = TaskType
     fields = "__all__"
     template_name = "tasks/task_type_list.html"
+    paginate_by = 2
 
     def get_context_data(self, **kwargs):
         context = super(TaskTypeListView, self).get_context_data(**kwargs)
@@ -140,6 +143,7 @@ class PositionListView(generic.ListView):
     model = Position
     fields = "__all__"
     template_name = "tasks/position_list.html"
+    paginate_by = 2
 
     def get_context_data(self, **kwargs):
         context = super(PositionListView, self).get_context_data(**kwargs)
