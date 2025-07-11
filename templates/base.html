@@ -66,7 +66,7 @@
         {% else %}
           <div class="d-flex">
             <a class="btn btn-outline-light me-2" href="{% url 'tasks:singup_create' %}">Sign up</a>
-            <a class="btn btn-primary" href="#">Login</a>
+            <a class="btn btn-primary" href="{% url 'login'%}?next={{request.path}}">Login</a>
           </div>
         {% endif %}
       </div>
