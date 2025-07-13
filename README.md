@@ -1,7 +1,7 @@
 # py_taskhub
 In the application:
 
--Each team member can:
+Each team member can:
 
 -create new tasks,
 
