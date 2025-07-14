@@ -1,7 +1,5 @@
 from django.db.models import Q
-from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
@@ -176,7 +174,7 @@ class PositionUpdateView(LoginRequiredMixin, generic.UpdateView):
 
 class ToggleCompleteTaskView(LoginRequiredMixin, generic.DetailView):
     model = Task
-    template_name = "tasks/task_detail.html"  # або інша, якщо є
+    template_name = "tasks/task_detail.html"
 
     def post(self, request, *args, **kwargs):
         task = self.get_object()
