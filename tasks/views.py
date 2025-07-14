@@ -174,14 +174,13 @@ class PositionUpdateView(LoginRequiredMixin, generic.UpdateView):
     template_name = "tasks/position_form.html"
 
 
-@login_required
-def toggle_complete_to_task(request, pk):
-    task = Task.objects.get(pk=pk)
-    if request.user in task.assignees.all():
-        if task.is_complete:
-            task.is_complete = False
+class ToggleCompleteTaskView(LoginRequiredMixin, generic.DetailView):
+    model = Task
+    template_name = "tasks/task_detail.html"  # або інша, якщо є
+
+    def post(self, request, *args, **kwargs):
+        task = self.get_object()
+        if request.user in task.assignees.all():
+            task.is_complete = not task.is_complete
             task.save()
-        else:
-            task.is_complete = True
-            task.save()
-    return HttpResponseRedirect(reverse_lazy("tasks:task-detail", args=[pk]))
+        return HttpResponseRedirect(reverse_lazy("tasks:task-detail", args=[task.pk]))

@@ -6,9 +6,15 @@
         <a class="btn btn-primary me-2" href="{% url 'tasks:task-update' pk=task.id %}">Update&nbsp;task</a>
         <a class="btn btn-danger me-2" href="{% url 'tasks:task-delete' pk=task.id %}">Delete&nbsp;task</a>
         {% if task.is_complete %}
-          <a class="btn btn-success" href="{% url 'tasks:toggle-task-complete' pk=task.id %}">Completed:&nbsp;Yes</a>
+          <form method="post" action="{% url 'tasks:toggle-task-complete' pk=task.id %}">
+            {% csrf_token %}
+            <input class="btn btn-success" type="submit" value="Completed:&nbsp;Yes">
+          </form>
         {% else %}
-          <a class="btn btn-warning" href="{% url 'tasks:toggle-task-complete' pk=task.id %}">Completed:&nbsp;No</a>
+          <form method="post" action="{% url 'tasks:toggle-task-complete' pk=task.id %}">
+            {% csrf_token %}
+            <input class="btn btn-warning" type="submit" value="Completed:&nbsp;No">
+          </form>
         {% endif %}
       </div>
     </li>
