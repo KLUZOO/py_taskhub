@@ -3,6 +3,7 @@ beautifulsoup4==4.13.4
 crispy-bootstrap5==2025.6
 django==4.2.23
 django-crispy-forms==2.4
+python-dotenv==1.1.1
 soupsieve==2.7
 sqlparse==0.5.3
 typing_extensions==4.14.1
