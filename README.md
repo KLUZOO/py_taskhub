@@ -1,3 +1,12 @@
+## 🔐 Test User Credentials
+
+To quickly test the application, you can use the following test user:
+
+- **Login:** `test`  
+- **Password:** `Aa12345678`
+
+---
+
 ## 📝 Project Description (English)
 
 ### Main Page
@@ -54,6 +63,14 @@ Search functionality is available on:
 
 Pagination is implemented to make navigation easier when many items are present.
 
+---
+
+## 🔐 Тестовий користувач
+
+Для швидкого тестування застосунку можна скористатися тестовим користувачем:
+
+- **Логін:** `test`  
+- **Пароль:** `Aa12345678`
 
 ---
 
