@@ -7,7 +7,7 @@ from tasks.forms import WorkerCreationForm, TaskForm, TaskCreateForm, WorkerUpda
 from tasks.models import Task, Worker, TaskType, Position
 
 
-class TaskListView(generic.ListView):
+class TaskListView(LoginRequiredMixin, generic.ListView):
     model = Task
     template_name = "tasks/index.html"
     paginate_by = 2
@@ -34,7 +34,7 @@ class TaskListView(generic.ListView):
         return Task.objects.select_related("task_type").prefetch_related("assignees").all().ordered_by_priority()
 
 
-class TaskDetailView(generic.DetailView):
+class TaskDetailView(LoginRequiredMixin, generic.DetailView):
     model = Task
 
 
@@ -61,7 +61,7 @@ class WorkerDetailView(LoginRequiredMixin, generic.DetailView):
     queryset = Worker.objects.prefetch_related("tasks").all()
 
 
-class WorkerListView(generic.ListView):
+class WorkerListView(LoginRequiredMixin, generic.ListView):
     model = Worker
     fields = "__all__"
     template_name = "tasks/worker_list.html"
@@ -102,7 +102,7 @@ class WorkerDeleteView(LoginRequiredMixin, generic.DeleteView):
     success_url = reverse_lazy("login")
 
 
-class TaskTypeListView(generic.ListView):
+class TaskTypeListView(LoginRequiredMixin, generic.ListView):
     model = TaskType
     fields = "__all__"
     template_name = "tasks/task_type_list.html"
@@ -137,7 +137,7 @@ class TaskTypeUpdateView(LoginRequiredMixin, generic.UpdateView):
     template_name = "tasks/task_type_form.html"
 
 
-class PositionListView(generic.ListView):
+class PositionListView(LoginRequiredMixin, generic.ListView):
     model = Position
     fields = "__all__"
     template_name = "tasks/position_list.html"
