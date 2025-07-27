@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block search %}
+  <form method="get" action="" class="d-flex me-3" role="search">
+    {{ search }}
+    <button class="btn btn-outline-success" type="submit">Search</button>
+  </form>
+{% endblock %}
+{% block create %}
+  {% if user.is_authenticated %}
+    <li>
+      <div class="d-flex">
+        <a class="btn btn-primary" href="{% url 'tasks:task-type-create' %}">Create&nbsp;task&nbsp;type</a>
+      </div>
+    </li>
+  {% endif %}
+{% endblock %}
+{% block container %}
+  <div class="container my-4">
+    <h2 class="mb-4">Task Types</h2>
+
+    {% if tasktype_list %}
+      <ul class="list-group">
+        {% for type in tasktype_list %}
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            {{ type.name }}
+            <a href="{% url 'tasks:task-type-update' pk=type.id %}" class="btn btn-sm btn-outline-primary">Update</a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="text-muted">There are no task types yet.</p>
+    {% endif %}
+  </div>
+{% endblock %}

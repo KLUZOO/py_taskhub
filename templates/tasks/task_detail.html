@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block create %}
+  {% if user.is_authenticated %}
+    <li>
+      <div class="d-flex">
+        <a class="btn btn-primary me-2" href="{% url 'tasks:task-update' pk=task.id %}">Update&nbsp;task</a>
+        <a class="btn btn-danger me-2" href="{% url 'tasks:task-delete' pk=task.id %}">Delete&nbsp;task</a>
+        {% if task.is_complete %}
+          <form method="post" action="{% url 'tasks:toggle-task-complete' pk=task.id %}">
+            {% csrf_token %}
+            <input class="btn btn-success" type="submit" value="Completed:&nbsp;Yes">
+          </form>
+        {% else %}
+          <form method="post" action="{% url 'tasks:toggle-task-complete' pk=task.id %}">
+            {% csrf_token %}
+            <input class="btn btn-warning" type="submit" value="Completed:&nbsp;No">
+          </form>
+        {% endif %}
+      </div>
+    </li>
+  {% endif %}
+{% endblock %}
+
+{% block container %}
+  <div class="card mt-4 shadow-sm">
+    <div class="card-body">
+      <h2 class="card-title">{{ task.name }}</h2>
+      <p class="card-text text-muted">
+        {{ task.description|default:"No description provided." }}
+      </p>
+
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <strong>Deadline:</strong> {{ task.deadline|date:"Y-m-d H:i" }}
+        </li>
+        <li class="list-group-item">
+          <strong>Priority:</strong> {{ task.get_priority_display }}
+        </li>
+        <li class="list-group-item">
+          <strong>Task Type:</strong> {{ task.task_type }}
+        </li>
+        <li class="list-group-item">
+          <strong>Assigned Workers:</strong>
+          {% if task.assignees.all %}
+            {{ task.assignees.all|join:", " }}
+          {% else %}
+            <span class="text-muted">None</span>
+          {% endif %}
+        </li>
+        <li class="list-group-item">
+          <strong>Status:</strong>
+          {% if task.is_complete %}
+            <span class="badge bg-success">Completed</span>
+          {% else %}
+            <span class="badge bg-warning text-dark">Pending</span>
+          {% endif %}
+        </li>
+      </ul>
+    </div>
+  </div>
+{% endblock %}

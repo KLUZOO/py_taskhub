@@ -1,0 +1,67 @@
+from django.urls import path
+
+from .views import (
+    TaskListView,
+    TaskDetailView,
+    TaskCreateView,
+    TaskUpdateView,
+    TaskDeleteView,
+    TaskTypeListView,
+    TaskTypeCreateView,
+    TaskTypeUpdateView,
+    PositionListView,
+    PositionCreateView,
+    PositionUpdateView,
+    WorkerListView,
+    WorkerDetailView,
+    WorkerCreateView,
+    WorkerUpdateView,
+    WorkerDeleteView,
+    ToggleCompleteTaskView,
+)
+
+urlpatterns = [
+    path("", TaskListView.as_view(), name="task-list"),
+    path("task/<int:pk>/", TaskDetailView.as_view(), name="task-detail"),
+    path("task/create/", TaskCreateView.as_view(), name="task-create"),
+    path(
+        "task/<int:pk>/update/",
+        TaskUpdateView.as_view(),
+        name="task-update",
+    ),
+    path(
+        "task/<int:pk>/delete/",
+        TaskDeleteView.as_view(),
+        name="task-delete",
+    ),
+    path(
+        "toggle/<int:pk>/toggle-complete/",
+        ToggleCompleteTaskView.as_view(),
+        name="toggle-task-complete",
+    ),
+    path("worker/", WorkerListView.as_view(), name="worker-list"),
+    path("worker/<int:pk>/", WorkerDetailView.as_view(), name="worker-detail"),
+    path("accounts/<int:pk>/update/", WorkerUpdateView.as_view(), name="worker-update"),
+    path(
+        "worker/<int:pk>/delete/",
+        WorkerDeleteView.as_view(),
+        name="worker-delete",
+    ),
+    path("task-type/", TaskTypeListView.as_view(), name="task-type-list"),
+    path("task-type/create/", TaskTypeCreateView.as_view(), name="task-type-create"),
+    path(
+        "task-type/<int:pk>/update/",
+        TaskTypeUpdateView.as_view(),
+        name="task-type-update",
+    ),
+    path("position/", PositionListView.as_view(), name="position-list"),
+    path("position/create/", PositionCreateView.as_view(), name="position-create"),
+    path(
+        "position/<int:pk>/update/",
+        PositionUpdateView.as_view(),
+        name="position-update",
+    ),
+    path("accounts/singup/", WorkerCreateView.as_view(), name="singup-create"),
+]
+
+app_name = "tasks"
